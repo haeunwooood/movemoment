@@ -28,6 +28,11 @@ const workImageInput = document.getElementById('work-image');
 const fileNameSpan = document.getElementById('file-name');
 const submitBtn = document.getElementById('submit-btn');
 
+let editMode = false;
+let editId = null;
+let currentThumbnailPath = null;
+let currentThumbnailUrl = null;
+
 // 파일 선택 시 이름 표시
 workImageInput.addEventListener('change', (e) => {
     const file = e.target.files[0];
@@ -57,6 +62,7 @@ async function renderAdminWorks() {
                 <strong>${work.title}</strong> - <span style="color:#aaa">${work.type}</span>
             </div>
             <div class="actions">
+                <button onclick="editWork(${JSON.stringify(work).replace(/"/g, '&quot;')})" class="btn-save" style="margin-top:0; padding: 10px 20px;">EDIT</button>
                 <button onclick="deleteWork(${work.id}, '${work.thumbnail_path}')" class="btn-delete">DELETE</button>
             </div>
         `;
@@ -64,10 +70,40 @@ async function renderAdminWorks() {
     });
 }
 
-// 새 작품 추가
+// 수정 모드 진입
+window.editWork = (work) => {
+    editMode = true;
+    editId = work.id;
+    currentThumbnailPath = work.thumbnail_path;
+    currentThumbnailUrl = work.thumbnail_url;
+
+    workTitleInput.value = work.title;
+    workTypeInput.value = work.type;
+    quill.root.innerHTML = work.content;
+    
+    fileNameSpan.textContent = `기존 이미지 유지 중 (변경하려면 새로 업로드)`;
+    submitBtn.textContent = 'UPDATE WORK';
+    
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+};
+
+// 폼 초기화 함수
+function resetForm() {
+    editMode = false;
+    editId = null;
+    currentThumbnailPath = null;
+    currentThumbnailUrl = null;
+    
+    adminForm.reset();
+    quill.setContents([]);
+    fileNameSpan.textContent = '선택된 파일 없음';
+    submitBtn.textContent = 'PUBLISH WORK';
+}
+
+// 새 작품 추가 또는 수정
 adminForm.addEventListener('submit', async (e) => {
     e.preventDefault();
-    submitBtn.textContent = 'PUBLISHING...';
+    submitBtn.textContent = editMode ? 'UPDATING...' : 'PUBLISHING...';
     submitBtn.disabled = true;
 
     const title = workTitleInput.value;
@@ -75,56 +111,80 @@ adminForm.addEventListener('submit', async (e) => {
     const content = quill.root.innerHTML;
     const imageFile = workImageInput.files[0];
 
-    if (!imageFile) {
-        alert('썸네일 이미지를 선택해주세요!');
-        submitBtn.textContent = 'PUBLISH WORK';
-        submitBtn.disabled = false;
-        return;
-    }
-
     try {
-        // 1. 이미지 업로드 (Supabase Storage)
-        const fileExt = imageFile.name.split('.').pop();
-        const fileName = `${Date.now()}.${fileExt}`;
-        const filePath = `thumbnails/${fileName}`;
+        let thumbnailUrl = currentThumbnailUrl;
+        let thumbnailPath = currentThumbnailPath;
 
-        const { error: uploadError } = await supabaseClient.storage
-            .from('works_media')
-            .upload(filePath, imageFile);
+        // 새 이미지가 업로드된 경우
+        if (imageFile) {
+            // 기존 이미지가 있다면 삭제
+            if (editMode && currentThumbnailPath) {
+                await supabaseClient.storage.from('works_media').remove([currentThumbnailPath]);
+            }
 
-        if (uploadError) throw uploadError;
+            const fileExt = imageFile.name.split('.').pop();
+            const fileName = `${Date.now()}.${fileExt}`;
+            const filePath = `thumbnails/${fileName}`;
 
-        // 2. 공개 URL 가져오기
-        const { data: publicUrlData } = supabaseClient.storage
-            .from('works_media')
-            .getPublicUrl(filePath);
+            const { error: uploadError } = await supabaseClient.storage
+                .from('works_media')
+                .upload(filePath, imageFile);
 
-        const thumbnailUrl = publicUrlData.publicUrl;
+            if (uploadError) throw uploadError;
 
-        // 3. Database에 저장
-        const { error: dbError } = await supabaseClient
-            .from('works')
-            .insert([{
-                title,
-                type,
-                content,
-                thumbnail_url: thumbnailUrl,
-                thumbnail_path: filePath
-            }]);
+            const { data: publicUrlData } = supabaseClient.storage
+                .from('works_media')
+                .getPublicUrl(filePath);
 
-        if (dbError) throw dbError;
+            thumbnailUrl = publicUrlData.publicUrl;
+            thumbnailPath = filePath;
+        }
 
-        alert('작품이 성공적으로 발행되었습니다!');
-        adminForm.reset();
-        quill.setContents([]);
-        fileNameSpan.textContent = '선택된 파일 없음';
+        if (editMode) {
+            // 데이터 수정
+            const { error: dbError } = await supabaseClient
+                .from('works')
+                .update({
+                    title,
+                    type,
+                    content,
+                    thumbnail_url: thumbnailUrl,
+                    thumbnail_path: thumbnailPath
+                })
+                .eq('id', editId);
+
+            if (dbError) throw dbError;
+            alert('작품이 수정되었습니다!');
+        } else {
+            // 데이터 삽입
+            if (!imageFile) {
+                alert('썸네일 이미지를 선택해주세요!');
+                submitBtn.textContent = 'PUBLISH WORK';
+                submitBtn.disabled = false;
+                return;
+            }
+
+            const { error: dbError } = await supabaseClient
+                .from('works')
+                .insert([{
+                    title,
+                    type,
+                    content,
+                    thumbnail_url: thumbnailUrl,
+                    thumbnail_path: thumbnailPath
+                }]);
+
+            if (dbError) throw dbError;
+            alert('작품이 성공적으로 발행되었습니다!');
+        }
+
+        resetForm();
         renderAdminWorks();
 
     } catch (err) {
         console.error('Error:', err);
-        alert('발행 중 오류가 발생했습니다: ' + err.message);
+        alert('처리 중 오류가 발생했습니다: ' + err.message);
     } finally {
-        submitBtn.textContent = 'PUBLISH WORK';
         submitBtn.disabled = false;
     }
 });
