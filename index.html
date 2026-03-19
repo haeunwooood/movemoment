@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MOVEMOMENT | 3D & Design Agency</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- GSAP for Interactions -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <!-- Three.js for 3D WebGL Background -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <!-- Supabase JS SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+    <!-- 3D Background Canvas -->
+    <canvas id="webgl-canvas"></canvas>
+    
+    <header>
+        <div class="logo">
+            <!-- sticker_vertical.pdf 로고를 텍스트로 임시 구현. 추후 png/svg로 변환 후 img 태그로 교체 가능 -->
+            MOVEMOMENT
+        </div>
+        <nav>
+            <a href="#about">ABOUT</a>
+            <a href="#works">WORKS</a>
+            <a href="marketing.html">MARKETING</a>
+            <a href="#contact">CONTACT</a>
+        </nav>
+    </header>
+
+    <main>
+        <section id="hero">
+            <h1 class="glitch" data-text="WE MOVE">WE MOVE</h1>
+            <h1 class="glitch green" data-text="YOUR MOMENT">YOUR MOMENT</h1>
+            <p>우리는 당신의 순간을 움직이게 합니다.</p>
+            <div class="scroll-indicator">↓ SCROLL</div>
+        </section>
+
+        <section id="about" class="panel">
+            <h2>BEYOND THE <span class="green">DIMENSION</span></h2>
+            <div class="about-content">
+                <p><strong>우리는</strong> 평범함을 거부합니다.<br>
+                주어진 시공간 안에서 키치하고 유니크한 감각을 시각화하는 영상,디자인,브랜딩 그룹입니다.<br>
+                시각을 넘어선 하나의 순간을 창의적으로 재작업합니다.</p>
+            </div>
+            <div class="marquee">
+                <div class="marquee-inner">
+                    <span>3D Product video - 3D, 2D MOTION GRAPHICS - VISUAL DESIGN - BRANDING - MARKETING  /</span>
+                    <span>3D Product video - 3D, 2D MOTION GRAPHICS - VISUAL DESIGN - BRANDING - MARKETING  /</span>
+                    <span>3D Product video - 3D, 2D MOTION GRAPHICS - VISUAL DESIGN - BRANDING - MARKETING  /</span>                </div>
+            </div>
+        </section>
+
+        <section id="works" class="panel">
+            <h2>OUR <span class="green">WORKS</span></h2>
+            <div id="works-container" class="works-grid">
+                <!-- Works will be rendered here dynamically -->
+            </div>
+        </section>
+        
+        <section id="partnersgroup" class="panel">
+            <h2>OUR <span class="green">PARTNERS</span></h2>
+            <div class="marquee-partners">
+                <div class="partner-marquee-inner">
+                    <div class="partner-logos">
+                        <img src="img/partner1.png" alt="Partner 1">
+                        <img src="img/partner2.png" alt="Partner 2">
+                        <img src="img/partner3.png" alt="Partner 3">
+                        <img src="img/partner4.png" alt="Partner 4">
+                    </div>
+                    <div class="partner-logos">
+                        <img src="img/partner1.png" alt="Partner 1">
+                        <img src="img/partner2.png" alt="Partner 2">
+                        <img src="img/partner3.png" alt="Partner 3">
+                        <img src="img/partner4.png" alt="Partner 4">
+                    </div>
+                    <div class="partner-logos">
+                        <img src="img/partner1.png" alt="Partner 1">
+                        <img src="img/partner2.png" alt="Partner 2">
+                        <img src="img/partner3.png" alt="Partner 3">
+                        <img src="img/partner4.png" alt="Partner 4">
+                    </div>
+                    <div class="partner-logos">
+                        <img src="img/partner1.png" alt="Partner 1">
+                        <img src="img/partner2.png" alt="Partner 2">
+                        <img src="img/partner3.png" alt="Partner 3">
+                        <img src="img/partner4.png" alt="Partner 4">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="panel">
+            <h2>MAKE A <span class="green">MOVEMENT</span></h2>
+            <p>우리와 함께 새로운 모먼트를 만들 준비가 되셨나요?</p>
+            
+            <form id="inquiry-form" class="inquiry-form">
+                <div class="form-row">
+                    <input type="text" id="inquiry-name" placeholder="성함 / 회사명" required>
+                    <input type="email" id="inquiry-email" placeholder="이메일 주소" required>
+                </div>
+                <input type="text" id="inquiry-subject" placeholder="문의 제목" required>
+                <textarea id="inquiry-message" placeholder="프로젝트에 대해 자유롭게 들려주세요 (내용, 예산, 일정 등)" required></textarea>
+                <button type="submit" id="inquiry-btn" class="btn">SEND MESSAGE</button>
+            </form>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

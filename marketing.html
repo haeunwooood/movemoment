@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MARKETING | MOVEMOMENT</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- GSAP for Interactions -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <!-- Three.js for 3D WebGL Background -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <!-- Supabase JS SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body class="marketing-page">
+    <!-- 3D Background Canvas -->
+    <canvas id="webgl-canvas"></canvas>
+    
+    <header>
+        <div class="logo" onclick="location.href='index.html'">
+            MOVEMOMENT
+        </div>
+        <nav>
+            <a href="index.html#about">ABOUT</a>
+            <a href="index.html#works">WORKS</a>
+            <a href="marketing.html">MARKETING</a>
+            <a href="index.html#contact">CONTACT</a>
+        </nav>
+    </header>
+
+    <main>
+        <section id="hero">
+            <h1 class="glitch" data-text="BEYOND NUMBERS">BEYOND NUMBERS</h1>
+            <h1 class="glitch green" data-text="REAL MOVEMENT">REAL MOVEMENT</h1>
+            <p>뻔한 공식을 버리다. 진짜 결과를 설계하다.</p>
+            <div style="margin-top: 40px; font-size: 1.2rem; color: #fff; max-width: 600px; line-height: 1.6;">
+                의미 없는 노출 숫자에 만족하십니까? <br>
+                <span class="green">MOVEMOMENT</span>는 당신의 브랜드가 실제로 '움직이는 순간'을 만듭니다.
+            </div>
+            <div class="scroll-indicator">↓ SCROLL</div>
+        </section>
+
+        <section id="marketing-01" class="panel">
+            <div class="marketing-num green">01.</div>
+            <h2>'보장'이라는 환상 대신 <br><span class="green">'자생'을 위한 설계</span></h2>
+            <div class="about-content">
+                <p>"월 10회 상위 노출 보장" 같은 영혼 없는 마케팅은 하지 않습니다. 공장장처럼 찍어내는 획일화된 방식으로는 결코 브랜드의 고유한 가치를 높일 수 없습니다. <br>
+                단기적인 매출 펌핑에는 효과가 있을지 모르나, 결국 늘어난 매출만큼 또다시 막대한 광고비를 쏟아부어야만 현상 유지가 되는 '비용의 딜레마'에 빠지게 됩니다. <br><br>
+                MOVEMOMENT는 밑 빠진 독에 예산을 낭비하게 두지 않습니다. 일회성 트래픽에 의존하는 대신, 브랜드가 스스로 자생하고 고객의 마음을 움직일 수 있는 진짜 결과를 위해 집요하게 고민하고 다각적인 시도를 병행합니다. <br>
+                마케팅의 본질은 휘발되는 '숫자'가 아니라, 사람을 매료시켜 스스로 찾아오게 만드는 '설득'에 있기 때문입니다.</p>
+            </div>
+        </section>
+
+        <section id="marketing-02" class="panel">
+            <div class="marketing-num green">02.</div>
+            <h2>정교한 최적화를 위한 <br><span class="green">'전략적 실패'</span></h2>
+            <div class="about-content">
+                <p>무형의 서비스, 남들과 다른 아이템을 판매할 때 기존의 성공 공식은 더 이상 통하지 않습니다.<br>
+                우리는 미지의 타겟을 향해 빠르게 시도하고, 기꺼이 실패합니다. <br><br>
+                이 치밀하게 계산된 실패들은 타겟의 반응을 읽어내는 가장 날카로운 데이터가 됩니다. 
+                수집된 데이터를 바탕으로 플랫폼에 맞는 입체적인 시각물과 감각적인 디자인을 변주하며, 점진적으로 타겟의 심리에 파고드는 가장 최적화된 마케팅 솔루션을 완성합니다.</p>
+            </div>
+        </section>
+
+        <section id="marketing-03" class="panel">
+            <div class="marketing-num green">03.</div>
+            <h2>미지의 영역에도 <br><span class="green">반드시 길은 있습니다</span></h2>
+            <div class="about-content">
+                <p>플랫폼이 변하고 트렌드가 요동쳐도, 우리는 길을 잃지 않습니다.<br>
+                15년 전, 페이스북 페이지 마케팅의 태동기부터 시작해 쇼핑몰을 성공 궤도에 올려놓은 치열한 실전 경험이 우리 안에 살아있습니다. <br><br>
+                직접 부딪히며 터득한 감각은 이론으로 배울 수 없습니다. 
+                환경이 바뀌어도 변하지 않는 소비자의 본질을 꿰뚫어 보기에, 우리는 다음 스텝을 어떻게 밟아야 하는지 정확히 알고 있습니다.</p>
+            </div>
+        </section>
+
+        <section id="contact" class="panel" style="text-align: center; align-items: center;">
+            <h2 class="glitch" data-text="WE ARE READY">WE ARE READY</h2>
+            <p style="font-size: 2rem; margin-bottom: 50px; line-height: 1.5;">
+                데이터로 증명하고, 경험으로 압도합니다.<br>
+                <span class="green">당신의 비즈니스를 다음 차원으로 끌어올릴 준비가 되셨습니까?</span>
+            </p>
+            
+            <form id="inquiry-form" class="inquiry-form">
+                <div class="form-row">
+                    <input type="text" id="inquiry-name" placeholder="성함 / 회사명" required>
+                    <input type="email" id="inquiry-email" placeholder="이메일 주소" required>
+                </div>
+                <input type="text" id="inquiry-subject" placeholder="문의 제목" required>
+                <textarea id="inquiry-message" placeholder="프로젝트에 대해 자유롭게 들려주세요 (내용, 예산, 일정 등)" required></textarea>
+                <button type="submit" id="inquiry-btn" class="btn">SEND MESSAGE</button>
+            </form>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

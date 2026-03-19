@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ADMIN | MOVEMOMENT</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Quill Editor CSS -->
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+    <!-- Supabase JS SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body class="admin-page">
+    <header>
+        <div class="logo" onclick="location.href='index.html'">
+            MOVEMOMENT
+        </div>
+        <nav>
+            <a href="index.html">GO TO SITE</a>
+            <a href="marketing.html">MARKETING</a>
+        </nav>
+    </header>
+
+    <main class="admin-container">
+        <h1 class="green">ADMIN PANEL</h1>
+        <p>새로운 작품(WORKS)을 추가하거나 기존 작품을 관리하세요.</p>
+        
+        <form id="admin-form" class="admin-form">
+            <input type="text" id="work-title" placeholder="작품 제목 (예: KITSCH POP)" required>
+            <input type="text" id="work-type" placeholder="작품 종류 또는 오브젝트 (예: 3D OBJECT 01)" required>
+            
+            <div class="upload-area">
+                <label for="work-image" class="btn-upload">썸네일 이미지 업로드 (JPG, PNG)</label>
+                <input type="file" id="work-image" accept="image/*" style="display: none;">
+                <span id="file-name" style="margin-top: 10px; font-size: 0.9rem; color: #888;">선택된 파일 없음</span>
+            </div>
+
+            <!-- Quill Editor Container -->
+            <div class="editor-label">상세 내용 작성</div>
+            <div id="editor-container" style="height: 300px; background: white; color: black; border-radius: 10px;"></div>
+            
+            <button type="submit" id="submit-btn" class="btn-save">PUBLISH WORK</button>
+        </form>
+
+        <h2 class="green">MANAGE WORKS</h2>
+        <div id="admin-list" class="admin-list">
+            <!-- Admin items will be listed here -->
+        </div>
+    </main>
+
+    <!-- Quill Editor JS -->
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+    <script src="admin.js"></script>
+</body>
+</html>

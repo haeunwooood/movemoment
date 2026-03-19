@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WORK | MOVEMOMENT</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Supabase JS SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+    <header>
+        <div class="logo" onclick="location.href='index.html'">
+            MOVEMOMENT
+        </div>
+        <nav>
+            <a href="index.html#about">ABOUT</a>
+            <a href="index.html#works">WORKS</a>
+            <a href="marketing.html">MARKETING</a>
+            <a href="index.html#contact">CONTACT</a>
+        </nav>
+    </header>
+
+    <main id="detail-main">
+        <div class="detail-container">
+            <div id="detail-loading" class="green">LOADING...</div>
+            <div id="detail-content-area" style="display: none;">
+                <div class="detail-header">
+                    <span id="work-type-display">3D OBJECT</span>
+                    <h1 id="work-title-display">WORK TITLE</h1>
+                </div>
+                <img id="work-thumbnail-display" class="detail-thumbnail" src="" alt="">
+                <div id="work-content-display" class="detail-content">
+                    <!-- Rich text content from editor will be here -->
+                </div>
+                
+                <div style="margin-top: 100px;">
+                    <a href="index.html#works" class="btn">BACK TO LIST</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="detail.js"></script>
+</body>
+</html>
