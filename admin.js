@@ -6,14 +6,17 @@ const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 // Quill 에디터 초기화
 const quill = new Quill('#editor-container', {
     theme: 'snow',
+    placeholder: '상세 내용을 작성하세요...',
     modules: {
-        toolbar: [
-            [{ 'header': [1, 2, 3, false] }],
-            ['bold', 'italic', 'underline', 'strike'],
-            ['image', 'link'],
-            [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-            ['clean']
-        ]
+        toolbar: {
+            container: [
+                [{ 'header': [1, 2, 3, false] }],
+                ['bold', 'italic', 'underline', 'strike'],
+                ['link', 'image', 'video'],
+                [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                ['clean']
+            ]
+        }
     }
 });
 

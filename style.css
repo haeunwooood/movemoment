@@ -402,6 +402,15 @@ nav a:hover {
     margin: 30px 0;
 }
 
+/* Quill Video Responsive Wrapper */
+.detail-content iframe.ql-video {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border-radius: 20px;
+    border: 2px solid var(--main-green);
+    margin: 30px 0;
+}
+
 .detail-thumbnail {
     width: 100%;
     max-height: 600px;
@@ -414,6 +423,18 @@ nav a:hover {
 .ql-toolbar.ql-snow {
     background: #f0f0f0;
     border-radius: 10px 10px 0 0;
+    border: none;
+}
+
+.ql-container.ql-snow {
+    border: none;
+    font-size: 1.1rem;
+}
+
+/* 에디터 내부 비디오 크기 조정 */
+.ql-editor iframe {
+    width: 100%;
+    aspect-ratio: 16 / 9;
 }
 
 .marquee-inner {
