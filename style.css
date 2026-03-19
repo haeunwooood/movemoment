@@ -75,6 +75,28 @@ nav a:hover {
     text-shadow: 0 0 10px var(--main-green);
 }
 
+/* Philosophy Section */
+#philosophy {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 150px 50px;
+    background: linear-gradient(to bottom, rgba(57, 255, 20, 0.05), transparent);
+}
+
+.philosophy-text {
+    font-size: 2.2rem;
+    line-height: 1.8;
+    word-break: keep-all;
+    font-weight: 400;
+    color: #eee;
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+}
+
+@media (max-width: 768px) {
+    .philosophy-text { font-size: 1.5rem; }
+}
+
 /* Hero Section */
 #hero {
     height: 100vh;

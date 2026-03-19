@@ -82,10 +82,10 @@ gsap.registerPlugin(ScrollTrigger);
 gsap.utils.toArray('.panel').forEach(panel => {
     // Works 섹션은 renderWorks에서 별도로 처리하거나, 여기를 유지
     if (panel.id !== 'works') {
-        gsap.from(panel.querySelectorAll('h2, .about-content, .btn, .marketing-num'), {
+        gsap.from(panel.querySelectorAll('h2, .about-content, .btn, .marketing-num, .philosophy-text'), {
             y: 100,
             opacity: 0,
-            duration: 1,
+            duration: 1.5,
             stagger: 0.2,
             scrollTrigger: {
                 trigger: panel,
