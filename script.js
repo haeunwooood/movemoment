@@ -186,6 +186,26 @@ if (inquiryForm) {
         }
     });
 }
+
+// 모바일 메뉴 토글
+const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+const mainNav = document.getElementById('main-nav');
+
+if (mobileMenuBtn && mainNav) {
+    mobileMenuBtn.addEventListener('click', () => {
+        mobileMenuBtn.classList.toggle('active');
+        mainNav.classList.toggle('active');
+    });
+
+    // 메뉴 클릭 시 닫기
+    mainNav.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+            mobileMenuBtn.classList.remove('active');
+            mainNav.classList.remove('active');
+        });
+    });
+}
+
 let mouseY = 0;
 let targetX = 0;
 let targetY = 0;
